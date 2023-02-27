@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    {#  просмотр вызовов по дате  #}
+    {#  просмотр клиентов по болезни #}
+    {#  просмотр лекарств по побочкам #}
+    <div class="h-100 container">
+        <div class="text-center my-3">
+            <a class="btn btn-lg btn-dark" href="{{ url_for('calls.new') }}">Добавить приём</a>
+        </div>
+
+{#        <div class="text-center my-3">#}
+{#            <a class="btn btn-lg btn-dark" href="{{ url_for('calls.date') }}">Количество вызовов по дате</a>#}
+{#        </div>#}
+
+{#        <div class="text-center my-3">#}
+{#            <a class="btn btn-lg btn-dark" href="{{ url_for('calls.sick') }}">Количество заболевших по названию болезни</a>#}
+{#        </div>#}
+
+{#        <div class="text-center my-3">#}
+{#            <a class="btn btn-lg btn-dark" href="{{ url_for('meds.number') }}">Найти лекарство по названию</a>#}
+{#        </div>#}
+
+        <div class="text-center my-3">
+            <a class="btn btn-lg btn-dark" href="{{ url_for('meds.new') }}">Добавить лекарство</a>
+        </div>
+    </div>
+{% endblock %}

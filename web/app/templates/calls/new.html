@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% from 'calls/form.html' import render_call_form %}
+
+{% block content %}
+    {{ render_call_form(url_for('calls.create'), customers, meds, medics) }}
+{% endblock %}

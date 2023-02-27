@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600&family=Montserrat+Alternates:wght@100&family=Playfair+Display&family=Source+Sans+3:ital,wght@1,500&display=swap" rel="stylesheet">
+
+    <title>Мед учет</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header class="header border-bottom">
+        <nav class="navbar bg-light">
+            <div class="container-fluid">
+                <div class="logo navbar-brand d-flex flex-grow ">
+                    <a class="main-link" href="{{ url_for('index') }}"><p class="mt-auto mb-auto">Мед учет</p></a>
+                </div>
+                <div class="nav-item">
+                    {% if current_user.is_authenticated %}
+                        <div class="d-flex flex-grow">
+                            <div class="mt-auto mb-auto" >
+                                <span> {{ current_user.first_name + " " + current_user.last_name }} </span>
+                                <a class="btn btn-lg btn-outline-dark" href="{{ url_for('auth.logout') }}">Выйти</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a class="btn btn-lg btn-outline-dark" href="{{ url_for('auth.login') }}">Войти</a>
+                    {% endif %}
+                    </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="alerts-area">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, msg in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show m-0 rounded-0" role="alert">
+                    {{ msg }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endwith %}
+    </div>
+
+    <main class="main flex-grow-1 books">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer bg-light text-black d-flex align-items-center justify-content-center py-3 border-top">
+        &copy; Шеховцов А.В. 201-351
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script defer src="{{ url_for('static', filename='main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+    <script>
+        const easyMDE = new EasyMDE({element: document.getElementById('short_description')});
+    </script>
+    <script>
+        const easyMDE_2 = new EasyMDE({element: document.getElementById('rewiew-text')});
+    </script>
+</body>
+
+</html>

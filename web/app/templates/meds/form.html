@@ -1,0 +1,37 @@
+{% macro render_med_form(url) %}
+    <div class="container">
+        <h2 class="mb-4 pt-5 text-center">Добавление лекарства</h2>
+        <form method="POST" action="{{ url }}" enctype="multipart/form-data">
+            <div class="mb-3 row">
+                <div class="col-md-6 d-flex flex-column">
+
+                    <div class="mb-3">
+                        <label for="name">Название</label>
+                        <input class="form-control" type="text" name="name" id="name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description">Описание</label>
+                        <input class="form-control" type="text" name="description" id="description">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="way">Способ приема</label>
+                        <input class="form-control" type="text" name="way" id="way">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="side">Побочные эффекты</label>
+                        <input class="form-control" type="text" name="side" id="side">
+                    </div>
+
+                </div>
+                <div class="mb-3 text-center">
+                    <input type="submit" class="btn btn-dark" value="Сохранить">
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+{% endmacro %}

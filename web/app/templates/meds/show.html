@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container d-flex flex-column">
+
+    <div class="row mb-3">
+        <div class="col-md-6 d-flex flex-column mt-2 text-right">
+
+            <div class="mt-1">
+                <p>Название: <span>"{{ med.name }}"</span></p>
+            </div>
+
+            <div class="mb-1">
+                <p>Описание: <span>{{ med.description }}</span></p>
+            </div>
+
+            <div class="mb-1">
+                <p>Способ приема: <span>{{ med.way }}</span></p>
+            </div>
+
+            <div class="mb-1">
+                <p>Побочные эффекты: <span>{{ med.side}}</span></p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

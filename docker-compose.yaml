@@ -1,0 +1,46 @@
+version: '3.9'
+services:
+  api:
+    container_name: web_app
+    build: .
+    image: 14rty/web-app:latest 
+    ports:
+    - 5432:5432
+    depends_on:
+      - postgres
+    restart: on-failure
+  
+  postgres:
+    container_name: my_db
+    image: postgres:latest
+    hostname: my_db
+    restart: always
+    ports:
+    - "54321:5432"
+    volumes:
+    - ./volume:/var/lib/postgres
+    environment:
+      - POSTGRES_DB=my_db
+      - POSTGRES_USER=db_user
+      - POSTGRES_PASSWORD=password4db      
+  pgadmin:
+    container_name: pgadmin_container
+    hostname: pgadmin
+    image: dpage/pgadmin4:6.14
+    user: "0:0"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "mail.14rty@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "1234"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - ../volume/pg:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    restart: on-failure
+    depends_on:
+      - postgres
+    ports:
+      - "5050:80"
+    restart: on-failure
+    depends_on:
+      - postgres

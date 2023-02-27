@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% from 'meds/form.html' import render_med_form %}
+
+{% block content %}
+    {{ render_med_form(url_for('meds.create')) }}
+{% endblock %}

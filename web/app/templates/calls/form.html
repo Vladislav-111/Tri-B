@@ -1,0 +1,59 @@
+{% macro render_call_form(url, customers, meds, medics, call={}) %}
+<div class="container">
+    <h2 class="mb-4 pt-5 text-center">Добавление приема</h2>
+    <form method="POST" action="{{ url }}" enctype="multipart/form-data">
+        <div class="mb-3 row">
+            <div class="col-md-6 d-flex flex-column">
+                <div class="mb-3">
+                    <label for="customer_id">Пациент</label>
+                    <select class="form-control selectpicker" data-live-search="true" name="customer_id" id="customer_id">
+                        {% for customer in customers %}
+                            <option value="{{ customer.id }}">{{ customer.first_name + " " + customer.last_name }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="place">Место</label>
+                    <select class="form-control selectpicker" data-live-search="true" name="place" id="place" >
+                        <option value="{{ 1 }}">Вызов</option>
+                        <option value="{{ 2 }}">Приём</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="symptom">Симптомы</label>
+                    <input class="form-control" type="text" name="symptom" id="symptom" value="{{ call.symptom or '' }}">
+                </div>
+                <div class="mb-3">
+                    <label for="diagnosis">Диагноз</label>
+                    <input class="form-control" type="text" name="diagnosis" id="diagnosis" value="{{ call.diagnosis or '' }}">
+                </div>
+                <div class="mb-3">
+                    <label for="med_id">Лекарства</label>
+                    <select class="form-control selectpicker" data-live-search="true" name="med_id" id="med_id" multiple>
+                        {% for med in meds %}
+                            <option value="{{ med.id }}"  >{{ med.name }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="short_description">Комментарий</label>
+                    <textarea class="form-control flex-grow-1" name="comment" id="comment" cols="30" rows="5">{{ call.comment or '' }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="medic_id">Врач</label>
+                    <select class="form-control selectpicker" data-live-search="true" name="medic_id" id="medic_id" >
+                        {% for medic in medics %}
+                            <option value="{{ medic.id }}">{{ medic.first_name + " " + medic.last_name }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 text-center">
+                <input type="submit" class="btn btn-dark" value="Сохранить">
+            </div>
+        </div> 
+    </form>
+</div>
+
+
+{% endmacro %}
